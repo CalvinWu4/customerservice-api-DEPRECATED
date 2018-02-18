@@ -3,14 +3,12 @@
 An ERP system developed in <Java 8,,,?> 
 
 ## Silo:  
-team_
+team_customersupport
 
 
 ## Team
 
-- Jane Doe
-
-- John Doe
+- Mustafa Alnuaimy: mxa5473
 
 
 ##Prerequisites
