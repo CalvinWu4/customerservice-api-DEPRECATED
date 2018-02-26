@@ -28530,11 +28530,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/camilogonzalez/Documents/erp-2175-erp-customersupport/CustomerSupport.csproj",
-      "projectName": "CustomerSupport",
-      "projectPath": "/Users/camilogonzalez/Documents/erp-2175-erp-customersupport/CustomerSupport.csproj",
+      "projectUniqueName": "/Users/camilogonzalez/Projects/CustomerServiceAPI/CustomerServiceAPI/CustomerServiceAPI.csproj",
+      "projectName": "CustomerServiceAPI",
+      "projectPath": "/Users/camilogonzalez/Projects/CustomerServiceAPI/CustomerServiceAPI/CustomerServiceAPI.csproj",
       "packagesPath": "/Users/camilogonzalez/.nuget/packages/",
-      "outputPath": "/Users/camilogonzalez/Documents/erp-2175-erp-customersupport/obj",
+      "outputPath": "/Users/camilogonzalez/Projects/CustomerServiceAPI/CustomerServiceAPI/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
