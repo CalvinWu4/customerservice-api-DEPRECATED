@@ -28524,23 +28524,23 @@
     ]
   },
   "packageFolders": {
-    "/Users/camilogonzalez/.nuget/packages/": {},
+    "/Users/camilo/.nuget/packages/": {},
     "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/camilogonzalez/Projects/CustomerServiceAPI/CustomerServiceAPI/CustomerServiceAPI.csproj",
+      "projectUniqueName": "/Users/camilo/Documents/RIT/customerservice-api/CustomerServiceAPI.csproj",
       "projectName": "CustomerServiceAPI",
-      "projectPath": "/Users/camilogonzalez/Projects/CustomerServiceAPI/CustomerServiceAPI/CustomerServiceAPI.csproj",
-      "packagesPath": "/Users/camilogonzalez/.nuget/packages/",
-      "outputPath": "/Users/camilogonzalez/Projects/CustomerServiceAPI/CustomerServiceAPI/obj",
+      "projectPath": "/Users/camilo/Documents/RIT/customerservice-api/CustomerServiceAPI.csproj",
+      "packagesPath": "/Users/camilo/.nuget/packages/",
+      "outputPath": "/Users/camilo/Documents/RIT/customerservice-api/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/camilogonzalez/.config/NuGet/NuGet.Config"
+        "/Users/camilo/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
