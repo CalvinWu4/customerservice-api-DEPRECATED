@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CustomerServiceAPI.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerServiceAPI.Controllers
@@ -9,6 +10,13 @@ namespace CustomerServiceAPI.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private TicketContext _context;
+
+        public ValuesController(TicketContext ctx)
+        {
+            _context = ctx;
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
