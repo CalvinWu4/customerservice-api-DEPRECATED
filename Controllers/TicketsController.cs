@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using CustomerServiceAPI.Models;
+using CustomerServiceAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,24 +14,29 @@ namespace CustomerServiceAPI.Controllers
     [Route("api/[controller]")]
     public class TicketsController : Controller
     {
-        Tic
-        public TicketsController(TicketContext context)
+        private ITicketRepository _ticketRepository;
+
+        public TicketsController(ITicketRepository ticketRepository)
         {
-                
+            _ticketRepository = ticketRepository;
         }
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var tickets = _ticketRepository.GetTickets();
+            var results = Mapper.Map<IEnumerable<TicketDto>>(tickets);
+
+            return Ok(results);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            
+            return Ok(_ticketRepository.GetTicket(id));
         }
 
         // POST api/values

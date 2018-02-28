@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CustomerServiceAPI.Entities;
+using CustomerServiceAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ namespace CustomerServiceAPI
 
             services.AddMvc();
             services.AddDbContext<TicketContext>(o => o.UseSqlServer(DB_URI));
+            services.AddScoped<ITicketRepository, TicketRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +40,11 @@ namespace CustomerServiceAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Entities.Ticket, Models.TicketDto>();
+            });
 
             app.UseMvc();
         }

@@ -10,6 +10,6 @@ namespace CustomerServiceAPI.Entities
             Database.EnsureCreated();
         }
 
-        DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
     }
 }
