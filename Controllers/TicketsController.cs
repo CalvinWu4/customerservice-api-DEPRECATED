@@ -35,8 +35,13 @@ namespace CustomerServiceAPI.Controllers
         [HttpGet("{id}", Name = "GetTicket")]
         public IActionResult Get(int id)
         {
-            
-            return Ok(_ticketRepository.GetTicket(id));
+            var ticket = _ticketRepository.GetTicket(id);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ticket);
         }
 
         // POST api/values
