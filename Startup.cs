@@ -44,6 +44,7 @@ namespace CustomerServiceAPI
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Entities.Ticket, Models.TicketDto>();
+                cfg.CreateMap<Models.TicketForCreationDto, Entities.Ticket>();
             });
 
             app.UseMvc();

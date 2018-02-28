@@ -14,6 +14,11 @@ namespace CustomerServiceAPI.Services
             _context = context;
         }
 
+        public void AddTicket(Ticket ticket)
+        {
+            _context.Add(ticket);
+        }
+
         public Ticket GetTicket(int ticketId)
         {
             return _context.Tickets.FirstOrDefault(t => t.Id == ticketId);
@@ -22,6 +27,11 @@ namespace CustomerServiceAPI.Services
         public IEnumerable<Ticket> GetTickets()
         {
             return _context.Tickets.OrderBy(t => t.FirstName).ToList();
+        }
+
+        public bool Save()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

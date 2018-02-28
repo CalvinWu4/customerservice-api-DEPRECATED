@@ -8,5 +8,7 @@ namespace CustomerServiceAPI.Services
     {
         IEnumerable<Ticket> GetTickets();
         Ticket GetTicket(int ticketId);
+        void AddTicket(Ticket ticket);
+        bool Save();
     }
 }

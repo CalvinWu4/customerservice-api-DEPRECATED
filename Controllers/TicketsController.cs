@@ -32,7 +32,7 @@ namespace CustomerServiceAPI.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetTicket")]
         public IActionResult Get(int id)
         {
             
@@ -41,8 +41,24 @@ namespace CustomerServiceAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]TicketForCreationDto ticket)
         {
+            if (ticket == null)
+            {
+                return BadRequest();
+            }
+
+            var finalTicket = Mapper.Map<Entities.Ticket>(ticket);
+            _ticketRepository.AddTicket(finalTicket);
+
+            if(!_ticketRepository.Save())
+            {
+                return StatusCode(500, "An error happened while creating ticket");
+            }
+
+            var createdTicket = Mapper.Map<Models.TicketDto>(finalTicket);
+
+            return CreatedAtRoute("GetTicket", new { id = createdTicket.Id }, createdTicket);
         }
 
         // PUT api/values/5
