@@ -18,8 +18,8 @@
     },
     "CustomerServiceAPI": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchBrowser": false,
+      "launchUrl": "api/tickets",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
