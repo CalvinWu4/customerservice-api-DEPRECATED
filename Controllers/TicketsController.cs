@@ -66,14 +66,40 @@ namespace CustomerServiceAPI.Controllers
 
         // PUT api/tickets/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Update(int id, [FromBody] TicketDto ticket)
         {
+            if (ticket == null)
+            {
+                return BadRequest();
+            }
+
+            var finalTicket = Mapper.Map<Entities.Ticket>(ticket);
+            if (finalTicket == null)
+            {
+                return NotFound();
+            }
+
+            //finalTicket.IsComplete = ticket.IsComplete;
+            //finalTicket.Name = ticket.Name;
+
+            //_ticketRepository.Update(finalTicket);
+            _ticketRepository.Save();
+            return new NoContentResult();
         }
 
         // DELETE api/tickets/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            var ticket = _ticketRepository.GetTicket(id);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            //_ticketRepository.Remove(ticket);
+            _ticketRepository.Save();
+            return new NoContentResult();
         }
     }
 }

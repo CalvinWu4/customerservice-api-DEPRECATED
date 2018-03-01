@@ -28631,23 +28631,23 @@
     ]
   },
   "packageFolders": {
-    "/Users/camilo/.nuget/packages/": {},
+    "/Users/mustafaalnuaimy/.nuget/packages/": {},
     "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/camilo/Documents/RIT/customerservice-api/CustomerServiceAPI.csproj",
+      "projectUniqueName": "/Users/mustafaalnuaimy/Documents/GitHub/customerservice-api/CustomerServiceAPI.csproj",
       "projectName": "CustomerServiceAPI",
-      "projectPath": "/Users/camilo/Documents/RIT/customerservice-api/CustomerServiceAPI.csproj",
-      "packagesPath": "/Users/camilo/.nuget/packages/",
-      "outputPath": "/Users/camilo/Documents/RIT/customerservice-api/obj",
+      "projectPath": "/Users/mustafaalnuaimy/Documents/GitHub/customerservice-api/CustomerServiceAPI.csproj",
+      "packagesPath": "/Users/mustafaalnuaimy/.nuget/packages/",
+      "outputPath": "/Users/mustafaalnuaimy/Documents/GitHub/customerservice-api/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/camilo/.config/NuGet/NuGet.Config"
+        "/Users/mustafaalnuaimy/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
