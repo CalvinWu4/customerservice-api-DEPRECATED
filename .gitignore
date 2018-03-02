@@ -270,3 +270,5 @@ __pycache__/
 # Solution
 
 obj/
+
+appsettings.Development.json
