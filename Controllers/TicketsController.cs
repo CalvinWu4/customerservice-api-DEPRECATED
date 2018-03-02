@@ -104,8 +104,12 @@ namespace CustomerServiceAPI.Controllers
                 return NotFound();
             }
 
-            //_ticketRepository.Remove(ticket);
-            _ticketRepository.Save();
+            _ticketRepository.DeleteTicket(ticket);
+            if(!_ticketRepository.Save())
+            {
+                return BadRequest();
+            }
+
             return new NoContentResult();
         }
     }

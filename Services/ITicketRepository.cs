@@ -11,6 +11,7 @@ namespace CustomerServiceAPI.Services
         Ticket GetTicket(int ticketId);
         void AddTicket(Ticket ticket);
         void UpdateTicket(Ticket ticket);
+        void DeleteTicket(Ticket ticket);
         bool Save();
     }
 }

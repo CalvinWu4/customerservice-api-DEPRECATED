@@ -35,6 +35,11 @@ namespace CustomerServiceAPI.Services
             return _context.Tickets.OrderBy(t => t.FirstName).ToList();
         }
 
+        public void DeleteTicket(Ticket ticket)
+        {
+            _context.Remove(ticket);
+        }
+
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);
