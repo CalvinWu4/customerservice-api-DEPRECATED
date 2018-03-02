@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CustomerServiceAPI.Entities;
+using CustomerServiceAPI.Models;
 
 namespace CustomerServiceAPI.Services
 {
@@ -17,6 +18,11 @@ namespace CustomerServiceAPI.Services
         public void AddTicket(Ticket ticket)
         {
             _context.Add(ticket);
+        }
+
+        public void UpdateTicket(Ticket ticket)
+        {
+            _context.Update(ticket);
         }
 
         public Ticket GetTicket(int ticketId)

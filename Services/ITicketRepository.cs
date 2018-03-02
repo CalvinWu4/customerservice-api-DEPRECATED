@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CustomerServiceAPI.Entities;
+using CustomerServiceAPI.Models;
 
 namespace CustomerServiceAPI.Services
 {
@@ -9,6 +10,7 @@ namespace CustomerServiceAPI.Services
         IEnumerable<Ticket> GetTickets();
         Ticket GetTicket(int ticketId);
         void AddTicket(Ticket ticket);
+        void UpdateTicket(Ticket ticket);
         bool Save();
     }
 }

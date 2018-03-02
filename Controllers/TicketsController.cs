@@ -66,24 +66,31 @@ namespace CustomerServiceAPI.Controllers
 
         // PUT api/tickets/5
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] TicketDto ticket)
+        public IActionResult Update(int id, [FromBody] TicketDtoForUpdate ticketData)
         {
-            if (ticket == null)
+            if (ticketData == null)
             {
                 return BadRequest();
             }
 
-            var finalTicket = Mapper.Map<Entities.Ticket>(ticket);
-            if (finalTicket == null)
+            var ticket = _ticketRepository.GetTicket(id);
+            if (ticket == null)
             {
                 return NotFound();
             }
 
-            //finalTicket.IsComplete = ticket.IsComplete;
-            //finalTicket.Name = ticket.Name;
+            ticket.FirstName = ticketData.FirstName == null ? ticket.FirstName : ticketData.FirstName;
+            ticket.LastName = ticketData.LastName == null ? ticket.LastName : ticketData.LastName;
+            ticket.Address = ticketData.Address == null ? ticket.Address : ticketData.Address;
+            ticket.Description = ticketData.Description == null ? ticket.Description : ticketData.Description;
 
-            //_ticketRepository.Update(finalTicket);
-            _ticketRepository.Save();
+            _ticketRepository.UpdateTicket(ticket);
+
+            if(!_ticketRepository.Save())
+            {
+                return BadRequest();
+            }
+
             return new NoContentResult();
         }
 
