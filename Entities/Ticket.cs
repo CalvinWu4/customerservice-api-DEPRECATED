@@ -20,5 +20,8 @@ namespace CustomerServiceAPI.Entities
 
         [Required]
         public string Description { get; set; }
+
+        [Required]
+        public string Status { get; set; }
     }
 }

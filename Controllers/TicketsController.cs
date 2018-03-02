@@ -83,6 +83,7 @@ namespace CustomerServiceAPI.Controllers
             ticket.LastName = ticketData.LastName == null ? ticket.LastName : ticketData.LastName;
             ticket.Address = ticketData.Address == null ? ticket.Address : ticketData.Address;
             ticket.Description = ticketData.Description == null ? ticket.Description : ticketData.Description;
+            ticket.Status = ticketData.Status == null ? ticket.Status : ticketData.Status;
 
             _ticketRepository.UpdateTicket(ticket);
 

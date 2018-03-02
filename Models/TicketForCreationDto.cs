@@ -16,5 +16,8 @@ namespace CustomerServiceAPI.Models
 
         [Required(ErrorMessage = "Ticket Description is required")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "Ticket Status is required")]
+        public string Status { get; set; }
     }
 }
