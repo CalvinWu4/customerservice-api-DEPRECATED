@@ -53,6 +53,9 @@ namespace CustomerServiceAPI.Controllers
                 return BadRequest();
             }
 
+            // set ticket as 'new' status
+            ticket.Status = "new";
+
             var finalTicket = Mapper.Map<Entities.Ticket>(ticket);
             _ticketRepository.AddTicket(finalTicket);
 
