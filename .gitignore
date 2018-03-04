@@ -272,3 +272,5 @@ __pycache__/
 obj/
 
 appsettings.Development.json
+
+.DS_Store

@@ -6,8 +6,17 @@ namespace CustomerServiceAPI.Models
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Address { get; set; }
+        public Address Address { get; set; }
         public string Description { get; set; }
         public bool IsComplete { get; set; }
+    }
+
+    public class Address {
+        public string Line1 { get; set; }
+        public string Line2 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zipcode { get; set; }
+        public string Country { get; set; }
     }
 }

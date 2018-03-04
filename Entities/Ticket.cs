@@ -16,9 +16,24 @@ namespace CustomerServiceAPI.Entities
         public string LastName { get; set; }
 
         [Required]
-        public string Address { get; set; }
+        public string Description { get; set; }
 
         [Required]
-        public string Description { get; set; }
+        public string AddressLine1 { get; set; }
+
+
+        public string AddressLine2 { get; set; }
+
+        [Required]
+        public string AddressCity { get; set; }
+
+        [Required]
+        public string AddressState { get; set; }
+
+        [Required]
+        public string AddressZipcode { get; set; }
+
+        [Required]
+        public string AddressCountry { get; set; }
     }
 }

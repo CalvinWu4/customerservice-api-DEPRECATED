@@ -12,7 +12,7 @@ namespace CustomerServiceAPI.Models
         public String LastName { get; set; }
 
         [Required(ErrorMessage = "Customer's Address is required")]
-        public string Address { get; set; }
+        public Address Address { get; set; }
 
         [Required(ErrorMessage = "Ticket Description is required")]
         public string Description { get; set; }
