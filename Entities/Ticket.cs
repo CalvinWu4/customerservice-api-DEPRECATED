@@ -19,6 +19,9 @@ namespace CustomerServiceAPI.Entities
         public string Description { get; set; }
 
         [Required]
+        public string Status { get; set; }
+
+        [Required]
         public string AddressLine1 { get; set; }
 
 

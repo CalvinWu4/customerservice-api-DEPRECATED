@@ -8,7 +8,7 @@ namespace CustomerServiceAPI.Models
         public string LastName { get; set; }
         public Address Address { get; set; }
         public string Description { get; set; }
-        public bool IsComplete { get; set; }
+        public string Status { get; set; }
     }
 
     public class Address {
