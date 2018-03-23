@@ -61,6 +61,7 @@ namespace CustomerServiceAPI.Controllers
             // Default values until Clients & Agent API is mocked
             finalTicket.ClientId = 0;
             finalTicket.AgentId = 0;
+            finalTicket.Opened = DateTime.Now;
 
             _ticketRepository.AddTicket(finalTicket);
 
