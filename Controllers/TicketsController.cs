@@ -53,10 +53,15 @@ namespace CustomerServiceAPI.Controllers
                 return BadRequest();
             }
 
-            // set ticket as 'new' status
-            ticket.Status = "new";
-
             var finalTicket = Mapper.Map<Entities.Ticket>(ticket);
+
+            // set ticket as 'new' status
+            finalTicket.Status = "new";
+
+            // Default values until Clients & Agent API is mocked
+            finalTicket.ClientId = 0;
+            finalTicket.AgentId = 0;
+
             _ticketRepository.AddTicket(finalTicket);
 
             if(!_ticketRepository.Save())

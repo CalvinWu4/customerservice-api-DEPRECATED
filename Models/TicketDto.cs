@@ -7,8 +7,12 @@ namespace CustomerServiceAPI.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Address Address { get; set; }
-        public string Description { get; set; }
         public string Status { get; set; }
+        public int ClientId { get; set; }
+        public int AgentId { get; set; }
+        public int DeviceId { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
     }
 
     public class Address {
