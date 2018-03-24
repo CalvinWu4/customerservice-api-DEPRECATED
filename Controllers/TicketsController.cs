@@ -46,7 +46,7 @@ namespace CustomerServiceAPI.Controllers
 
         // POST api/tickets
         [HttpPost]
-        public IActionResult Post([FromBody]TicketForCreationDto ticket)
+        public IActionResult Post([FromBody]TicketDtoForCreation ticket)
         {
             if (ticket == null)
             {

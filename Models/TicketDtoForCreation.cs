@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CustomerServiceAPI.Models
 {
-    public class TicketForCreationDto
+    public class TicketDtoForCreation
     {
         [Required(ErrorMessage = "Customer's FirstName is required")]
         public String FirstName { get; set; }

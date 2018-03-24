@@ -55,7 +55,7 @@ namespace CustomerServiceAPI
                     Country = src.AddressCountry,
                 }));
 
-                cfg.CreateMap<Models.TicketForCreationDto, Entities.Ticket>();
+                cfg.CreateMap<Models.TicketDtoForCreation, Entities.Ticket>();
             });
 
             app.UseMvc();
