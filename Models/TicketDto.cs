@@ -4,8 +4,6 @@ namespace CustomerServiceAPI.Models
     public class TicketDto
     {
         public string Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string Status { get; set; }
         public int ClientId { get; set; }
         public int AgentId { get; set; }

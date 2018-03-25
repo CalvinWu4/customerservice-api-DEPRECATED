@@ -32,7 +32,7 @@ namespace CustomerServiceAPI.Services
 
         public IEnumerable<Ticket> GetTickets()
         {
-            return _context.Tickets.OrderBy(t => t.FirstName).ToList();
+            return _context.Tickets.OrderBy(t => t.ClientId).ToList();
         }
 
         public void DeleteTicket(Ticket ticket)

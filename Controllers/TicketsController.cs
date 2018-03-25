@@ -90,8 +90,7 @@ namespace CustomerServiceAPI.Controllers
                 return NotFound();
             }
 
-            ticket.FirstName = ticketData.FirstName == null ? ticket.FirstName : ticketData.FirstName;
-            ticket.LastName = ticketData.LastName == null ? ticket.LastName : ticketData.LastName;
+            ticket.Title = ticketData.Title == null ? ticket.Title : ticketData.Title;
             ticket.Description = ticketData.Description == null ? ticket.Description : ticketData.Description;
             ticket.Status = ticketData.Status == null ? ticket.Status : ticketData.Status;
 
