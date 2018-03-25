@@ -20,24 +20,6 @@ namespace CustomerServiceAPI.Entities
         public string Status { get; set; }
 
         [Required]
-        public string AddressLine1 { get; set; }
-
-
-        public string AddressLine2 { get; set; }
-
-        [Required]
-        public string AddressCity { get; set; }
-
-        [Required]
-        public string AddressState { get; set; }
-
-        [Required]
-        public string AddressZipcode { get; set; }
-
-        [Required]
-        public string AddressCountry { get; set; }
-
-        [Required]
         public int ClientId { get; set; }
         
         [Required]

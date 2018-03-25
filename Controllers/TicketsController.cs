@@ -95,15 +95,6 @@ namespace CustomerServiceAPI.Controllers
             ticket.Description = ticketData.Description == null ? ticket.Description : ticketData.Description;
             ticket.Status = ticketData.Status == null ? ticket.Status : ticketData.Status;
 
-            if (ticketData.Address != null) {
-                ticket.AddressLine1 = ticketData.Address.Line1 == null ? ticket.AddressLine1 : ticketData.Address.Line1;
-                ticket.AddressLine2 = ticketData.Address.Line2 == null ? ticket.AddressLine2 : ticketData.Address.Line2;
-                ticket.AddressCity = ticketData.Address.City == null ? ticket.AddressCity : ticketData.Address.City;
-                ticket.AddressState = ticketData.Address.State == null ? ticket.AddressState : ticketData.Address.State;
-                ticket.AddressZipcode = ticketData.Address.Zipcode == null ? ticket.AddressZipcode : ticketData.Address.Zipcode;
-                ticket.AddressCountry = ticketData.Address.Country == null ? ticket.AddressCountry : ticketData.Address.Country;
-            }
-
             _ticketRepository.UpdateTicket(ticket);
 
             if(!_ticketRepository.Save())
