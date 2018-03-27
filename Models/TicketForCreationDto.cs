@@ -5,15 +5,6 @@ namespace CustomerServiceAPI.Models
 {
     public class TicketForCreationDto
     {
-        [Required(ErrorMessage = "Customer's FirstName is required")]
-        public String FirstName { get; set; }
-
-        [Required(ErrorMessage = "Customer's LastName is required")]
-        public String LastName { get; set; }
-
-        [Required(ErrorMessage = "Customer's Address is required")]
-        public Address Address { get; set; }
-
         [Required(ErrorMessage = "Ticket Status is required")]
         public string Status { get; set; }
 

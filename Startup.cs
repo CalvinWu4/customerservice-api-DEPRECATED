@@ -44,17 +44,7 @@ namespace CustomerServiceAPI
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Entities.Ticket, Models.TicketDto>()
-                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => new Address
-                {
-                    Line1 = src.AddressLine1,
-                    Line2 = src.AddressLine2,
-                    City = src.AddressCity,
-                    State = src.AddressState,
-                    Zipcode = src.AddressZipcode,
-                    Country = src.AddressCountry,
-                }));
-
+                cfg.CreateMap<Entities.Ticket, Models.TicketDto>();
                 cfg.CreateMap<Models.TicketForCreationDto, Entities.Ticket>();
             });
 
