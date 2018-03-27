@@ -21,9 +21,15 @@ namespace CustomerServiceAPI.Controllers
 
         // GET: api/tickets
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll([FromQuery(Name = "ClientId")] int clientId = -1)
         {
             var tickets = _ticketRepository.GetTickets();
+
+            if (clientId != -1)
+            {
+                tickets = tickets.Where<Entities.Ticket>(t => t.ClientId == clientId);
+            }
+
             var results = Mapper.Map<IEnumerable<TicketDto>>(tickets);
 
             return Ok(results);
