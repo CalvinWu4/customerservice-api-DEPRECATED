@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerServiceAPI", "CustomerServiceAPI\CustomerServiceAPI.csproj", "{8D0468A7-FAF1-4CD7-AE7E-B10DC4AA127C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerServiceAPI.Tests", "CustomerServiceAPI.Tests\CustomerServiceAPI.Tests\CustomerServiceAPI.Tests.csproj", "{16520A95-A653-4C8E-8951-72DF7EB93526}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerServiceAPI.Tests", "CustomerServiceAPI.Tests\CustomerServiceAPI.Tests.csproj", "{69EB5EA1-6F13-4297-AC15-BE239EEB72A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,10 @@ Global
 		{8D0468A7-FAF1-4CD7-AE7E-B10DC4AA127C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D0468A7-FAF1-4CD7-AE7E-B10DC4AA127C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D0468A7-FAF1-4CD7-AE7E-B10DC4AA127C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16520A95-A653-4C8E-8951-72DF7EB93526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16520A95-A653-4C8E-8951-72DF7EB93526}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16520A95-A653-4C8E-8951-72DF7EB93526}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16520A95-A653-4C8E-8951-72DF7EB93526}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69EB5EA1-6F13-4297-AC15-BE239EEB72A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69EB5EA1-6F13-4297-AC15-BE239EEB72A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69EB5EA1-6F13-4297-AC15-BE239EEB72A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69EB5EA1-6F13-4297-AC15-BE239EEB72A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		BaseDirectory = CustomerServiceAPI
