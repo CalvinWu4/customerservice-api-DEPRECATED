@@ -30,7 +30,7 @@ namespace CustomerServiceAPI
             string DB_URI = Configuration["DB"];
 
             services.AddMvc();
-            services.AddDbContext<TicketContext>(o => o.UseMySql(DB_URI));
+            services.AddDbContext<Context>(o => o.UseMySql(DB_URI));
             services.AddScoped<ITicketRepository, TicketRepository>();
         }
 
