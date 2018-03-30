@@ -25,9 +25,9 @@ namespace CustomerServiceAPI.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_clientRepository.GetClients());
         }
 
         // GET api/values/5
@@ -65,12 +65,14 @@ namespace CustomerServiceAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
+            
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            
         }
     }
 }
