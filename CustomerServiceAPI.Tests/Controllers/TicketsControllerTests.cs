@@ -10,9 +10,9 @@ using System.Linq;
 
 namespace CustomerServiceAPI.Tests.Controllers
 {
-    public class TicketsRepositoryTests
+    public class TicketsControllerTests
     {
-        public TicketsRepositoryTests()
+        public TicketsControllerTests()
         {
             AutoMapperConfig.Setup();
         }
@@ -26,7 +26,7 @@ namespace CustomerServiceAPI.Tests.Controllers
             var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
             var tickets = okResult.Value.Should().BeAssignableTo<IEnumerable<TicketDto>>().Subject;
 
-            tickets.Count().Should().Be(0);
+            tickets.Count().Should().Be(1);
         }
     }
 }
