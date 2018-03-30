@@ -63,14 +63,25 @@ namespace CustomerServiceAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
-            
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            
+            var client = _clientRepository.GetClient(id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            _clientRepository.DeleteClient(client);
+            if (!_clientRepository.Save())
+            {
+                return BadRequest();
+            }
+
+            return NoContent();
         }
     }
 }
