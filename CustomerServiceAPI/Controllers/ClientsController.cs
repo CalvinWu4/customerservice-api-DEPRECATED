@@ -9,7 +9,6 @@ using CustomerServiceAPI.Entities;
 using CustomerServiceAPI.Services;
 
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CustomerServiceAPI.Controllers
 {
@@ -40,7 +39,6 @@ namespace CustomerServiceAPI.Controllers
                 return NotFound();
             }
 
-            var result = Mapper.Map<ClientDto>(client);
             return Ok(client);
         }
 
