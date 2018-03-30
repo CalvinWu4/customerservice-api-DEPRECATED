@@ -32,6 +32,7 @@ namespace CustomerServiceAPI
             services.AddMvc();
             services.AddDbContext<Context>(o => o.UseMySql(DB_URI));
             services.AddScoped<ITicketRepository, TicketRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +47,9 @@ namespace CustomerServiceAPI
             {
                 cfg.CreateMap<Entities.Ticket, Models.TicketDto>();
                 cfg.CreateMap<Models.TicketForCreationDto, Entities.Ticket>();
+
+                cfg.CreateMap<Entities.Client, Models.ClientDto>();
+                cfg.CreateMap<Models.ClientDtoForCreation, Entities.Client>();
             });
 
             app.UseMvc();
