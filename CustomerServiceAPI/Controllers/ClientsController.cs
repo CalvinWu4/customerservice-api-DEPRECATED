@@ -22,7 +22,7 @@ namespace CustomerServiceAPI.Controllers
             _clientRepository = clientRepository;
         }
 
-        // GET: api/values
+        // GET: api/clients
         [HttpGet]
         public IActionResult Get()
         {
@@ -34,15 +34,12 @@ namespace CustomerServiceAPI.Controllers
         public IActionResult Get(int id)
         {
             var client = _clientRepository.GetClient(id);
-            if (client == null)
-            {
-                return NotFound();
-            }
+            if (client == null) return NotFound();
 
             return Ok(client);
         }
 
-        // POST api/values
+        // POST api/clients
         [HttpPost]
         public IActionResult Post([FromBody]ClientDtoForCreation client)
         {
@@ -59,7 +56,7 @@ namespace CustomerServiceAPI.Controllers
             return CreatedAtRoute("GetClient", new { id = finalClient.Id }, finalClient);
         }
 
-        // PUT api/values/5
+        // PUT api/clients/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]ClientDtoForUpdate clientData)
         {
@@ -78,15 +75,12 @@ namespace CustomerServiceAPI.Controllers
             return NoContent();
         }
 
-        // DELETE api/values/5
+        // DELETE api/clients/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var client = _clientRepository.GetClient(id);
-            if (client == null)
-            {
-                return NotFound();
-            }
+            if (client == null) NotFound();
 
             _clientRepository.DeleteClient(client);
             if (!_clientRepository.Save())
