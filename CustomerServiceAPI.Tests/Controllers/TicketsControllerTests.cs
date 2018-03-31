@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using CustomerServiceAPI.Tests.Mocks;
 using Microsoft.AspNetCore.Mvc;
 using FluentAssertions;
@@ -7,11 +6,6 @@ using CustomerServiceAPI.Controllers;
 using System.Collections.Generic;
 using CustomerServiceAPI.Models;
 using System.Linq;
-using CustomerServiceAPI;
-using CustomerServiceAPI.Entities;
-using CustomerServiceAPI.Services;
-using Xunit.Sdk;
-using Moq;
 
 namespace CustomerServiceAPI.Tests.Controllers
 {
@@ -50,7 +44,7 @@ namespace CustomerServiceAPI.Tests.Controllers
         }
 
         [Fact]
-        public void afterPost_CountShouldReturnOne()
+        public void AfterPost_CountShouldReturnOne()
         {
             _emptyRepoController.Post(new TicketForCreationDto());
             var result = _emptyRepoController.GetAll();
@@ -172,14 +166,6 @@ namespace CustomerServiceAPI.Tests.Controllers
             var result = _singleTicketRepoController.Update(0, new TicketDtoForUpdate());
 
             Assert.IsType<NoContentResult>(result);
-        }
-
-        [Fact]
-        public void GetAll()    // Question
-        {
-            var result = _singleTicketRepoController.GetAll(42);
-
-            Assert.IsType<OkObjectResult>(result);
         }
 
         [Fact]
