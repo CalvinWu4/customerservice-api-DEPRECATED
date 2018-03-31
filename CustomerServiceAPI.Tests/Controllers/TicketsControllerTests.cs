@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 using CustomerServiceAPI.Tests.Mocks;
 using Microsoft.AspNetCore.Mvc;
 using FluentAssertions;
@@ -27,61 +28,56 @@ namespace CustomerServiceAPI.Tests.Controllers
             _emptyRepoController = new TicketsController(new TicketRepositoryMock());
         }
 
-        public void Dispose()
+        #region GetAll Tests
+        [Fact]
+        public void GetAll_ShouldReturnEmptyTicketList()
         {
-            _emptyRepoController.Dispose();
+            var result = _emptyRepoController.GetAll(-2);   // Non-existing id
+
+            var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
+            var tickets = okResult.Value.Should().BeAssignableTo<IEnumerable<TicketDto>>().Subject;
+
+            tickets.Count().Should().Be(0); // Checking if it is empty
         }
 
         [Fact]
-        public void WithNoTickets_CountShouldReturnZero()
+        public void GetAllNonExistingClientId_ShouldReturnEmptyTicketList() 
         {
             var result = _emptyRepoController.GetAll();
 
             var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
             var tickets = okResult.Value.Should().BeAssignableTo<IEnumerable<TicketDto>>().Subject;
 
-            tickets.Count().Should().Be(0);
+            tickets.Count().Should().Be(0); // Checking if it is empty
         }
 
+        // Needs Clients and Agents API implemented
+        // Pre: There needs to be at least one client in the system
         [Fact]
-        public void AfterPost_CountShouldReturnOne()
+        public void GetValidClientId_ShouldReturnNonEmptyTicketList() 
         {
-            _emptyRepoController.Post(new TicketForCreationDto());
-            var result = _emptyRepoController.GetAll();
+            var result = _emptyRepoController.GetAll(0);
 
             var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
             var tickets = okResult.Value.Should().BeAssignableTo<IEnumerable<TicketDto>>().Subject;
 
-            tickets.Count().Should().Be(1);
-
-        }
-        //        var controller = new Mock<ITicketRepository>().Setup(m => m.GetTickets()).Returns(null);
-
-        [Fact]
-        public void DeleteInvalidTicket_ShouldReturnNotFound()
-        {
-            var result = _emptyRepoController.Delete(1); //Delete ticket with id of 1
-
-            Assert.IsType<NotFoundResult>(result);
+            tickets.Count().Should().BeGreaterThan(0); // Checking if it is non-empty
         }
 
+
+        #endregion
+
+        #region Get Tests
         [Fact]
         public void GetInvalidTicket_ShouldReturnNotFound()
         {
-            var result = _emptyRepoController.Get(1); //Get ticket with id of 1
+            var result = _emptyRepoController.Get(0);
 
             Assert.IsType<NotFoundResult>(result);
         }
+        #endregion
 
-        [Fact]
-        public void PutInvalidTicket_ShouldReturnNotFound()
-        {
-            var result = _emptyRepoController.Update(1, new TicketDtoForUpdate());
-
-            Assert.IsType<NotFoundResult>(result);
-        }
-
-
+        #region Post Tests 
         [Fact]
         public void PostEmptyTicket_ShouldReturnBadRequest()
         {
@@ -91,12 +87,46 @@ namespace CustomerServiceAPI.Tests.Controllers
         }
 
         [Fact]
-        public void Post_ShouldReturnCreatedAtRoute()
+        public void ValidPost_ShouldReturnTicket()
         {
             var result = _emptyRepoController.Post(new TicketForCreationDto());
 
-            Assert.IsType<CreatedAtRouteResult>(result);
+            var createdAtRouteResult = result.Should().BeOfType<CreatedAtRouteResult>().Subject;
+            createdAtRouteResult.Value.Should().BeAssignableTo<TicketDto>();
         }
+
+        [Fact]
+        public void AfterValidPost_CountShouldReturnOne()
+        {
+            _emptyRepoController.Post(new TicketForCreationDto());
+            var result = _emptyRepoController.GetAll();
+
+            var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
+            var tickets = okResult.Value.Should().BeAssignableTo<IEnumerable<TicketDto>>().Subject;
+
+            tickets.Count().Should().Be(1);
+        }
+        #endregion
+
+        #region Delete Tests
+        [Fact]
+        public void DeleteInvalidTicket_ShouldReturnNotFound()
+        {
+            var result = _emptyRepoController.Delete(0);
+            Assert.IsType<NotFoundResult>(result);
+        }
+        #endregion
+
+        #region Update Tests
+        [Fact]
+        public void PutInvalidTicket_ShouldReturnNotFound()
+        {
+            var result = _emptyRepoController.Update(1, new TicketDtoForUpdate());
+
+            Assert.IsType<NotFoundResult>(result);
+        }
+#endregion
+
     }
 
     public class SingleTicketRepoTests : IClassFixture<Startup>
@@ -111,22 +141,59 @@ namespace CustomerServiceAPI.Tests.Controllers
             _singleTicketRepoController.Post(new TicketForCreationDto());
         }
 
-        public void Dispose()
+        // GetAll Tests are performed in the EmptyRepoTests Post Tests
+
+        #region Get Tests
+        [Fact]
+        public void ValidGet_ShouldReturnTicket()
         {
-            _singleTicketRepoController.Dispose();
+            var result = _singleTicketRepoController.Get(0);
+
+            var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
+            okResult.Value.Should().BeAssignableTo<TicketDto>();
+        }
+        #endregion
+
+        #region Post Tests
+        // Needs Clients and Agents API implemented
+        [Fact]
+        public void AfterValidPost_TicketReturnedIdShouldBeIncremented() 
+        {
+            var result = _singleTicketRepoController.Post(new TicketForCreationDto());
+
+            var createdAtRouteResult = result.Should().BeOfType<CreatedAtRouteResult>().Subject;
+            var ticket = createdAtRouteResult.Value.Should().BeAssignableTo<TicketDto>().Subject;
+
+           ticket.Id.Should().Be("1");   // SingleTicketRepo has a single ticket with an id of 0
+        }
+        #endregion
+
+        #region Update Tests
+        [Fact]
+        public void PutEmptyTicket_ShouldReturnBadRequest()
+        {
+            var result = _singleTicketRepoController.Update(0, null);
+
+            Assert.IsType<BadRequestResult>(result);
+        }
+        [Fact]
+        public void UpdateValidTicket_ShouldReturnOk()
+        {
+            var result = _singleTicketRepoController.Update(0, new TicketDtoForUpdate());
+
+            Assert.IsType<NoContentResult>(result);
         }
 
         [Fact]
-        public void WithOneTicket_CountShouldReturnOne()
+        public void UpdateValidTicketWithNullData_ShouldReturnBadRequest()
         {
-            var result = _singleTicketRepoController.GetAll();
+            var result = _singleTicketRepoController.Update(0, null);
 
-            var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
-            var tickets = okResult.Value.Should().BeAssignableTo<IEnumerable<TicketDto>>().Subject;
-
-            tickets.Count().Should().Be(1);
+            Assert.IsType<BadRequestResult>(result);
         }
+        #endregion
 
+        #region Delete Tests
         [Fact]
         public void DeleteValidTicket_ShouldReturnNoContentResult()
         {
@@ -143,38 +210,7 @@ namespace CustomerServiceAPI.Tests.Controllers
 
             Assert.IsType<NotFoundResult>(result);
         }
-
-        [Fact]
-        public void PutEmptyTicket_ShouldReturnBadRequest()
-        {
-            var result = _singleTicketRepoController.Update(0, null);
-
-            Assert.IsType<BadRequestResult>(result);
-        }
-
-        [Fact]
-        public void GetValidTicket_ShouldReturnOk()
-        {
-            var result = _singleTicketRepoController.Get(0);
-
-            Assert.IsType<OkObjectResult>(result);
-        }
-
-        [Fact]
-        public void PutValidTicket_ShouldReturnOk()
-        {
-            var result = _singleTicketRepoController.Update(0, new TicketDtoForUpdate());
-
-            Assert.IsType<NoContentResult>(result);
-        }
-
-        [Fact]
-        public void UpdateValidTicketWithNullData_ShouldReturnBadRequest()
-        {
-            var result = _singleTicketRepoController.Update(0, null);
-
-            Assert.IsType<BadRequestResult>(result);
-        }
+#endregion
 
     }
 }
