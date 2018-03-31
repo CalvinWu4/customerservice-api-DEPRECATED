@@ -61,8 +61,20 @@ namespace CustomerServiceAPI.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]ClientDtoForUpdate clientData)
         {
+            if (clientData == null) return BadRequest();
+
+            var client = _clientRepository.GetClient(id);
+            if (client == null) return NotFound();
+
+            client.FirstName = clientData.FirstName == null ? client.FirstName : clientData.FirstName;
+            client.LastName = clientData.LastName == null ? client.LastName : clientData.LastName;
+
+            _clientRepository.UpdateClient(client);
+            if (!_clientRepository.Save()) return BadRequest();
+
+            return NoContent();
         }
 
         // DELETE api/values/5
