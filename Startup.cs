@@ -32,6 +32,8 @@ namespace CustomerServiceAPI
             services.AddMvc();
             services.AddDbContext<TicketContext>(o => o.UseMySql(DB_URI));
             services.AddScoped<ITicketRepository, TicketRepository>();
+            services.AddDbContext<ReviewContext>(o => o.UseMySql(DB_URI));
+            services.AddScoped<IReviewRepository, ReviewRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,18 +46,10 @@ namespace CustomerServiceAPI
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Entities.Ticket, Models.TicketDto>()
-                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => new Address
-                {
-                    Line1 = src.AddressLine1,
-                    Line2 = src.AddressLine2,
-                    City = src.AddressCity,
-                    State = src.AddressState,
-                    Zipcode = src.AddressZipcode,
-                    Country = src.AddressCountry,
-                }));
-
+                cfg.CreateMap<Entities.Ticket, Models.TicketDto>();
+                cfg.CreateMap<Entities.Review, Models.ReviewDto>();
                 cfg.CreateMap<Models.TicketDtoForCreation, Entities.Ticket>();
+                cfg.CreateMap<Models.ReviewDtoForCreation, Entities.Review> ();
             });
 
             app.UseMvc();

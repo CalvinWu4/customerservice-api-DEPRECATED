@@ -27,12 +27,12 @@ namespace CustomerServiceAPI.Services
 
         public Review GetReview(int Id)
         {
-            return _context.Reviews.FirstOrDefault(t => t.agentId == Id);
+            return _context.Reviews.FirstOrDefault(t => t.AgentId == Id);
         }
 
         public IEnumerable<Review> GetReviews()
         {
-            return _context.Reviews.OrderBy(t => t.dateCreated).ToList();
+            return _context.Reviews.OrderBy(t => t.DateCreated).ToList();
         }
 
         public void DeleteTicket(Review review)

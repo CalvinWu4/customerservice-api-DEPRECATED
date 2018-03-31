@@ -10,16 +10,16 @@ namespace CustomerServiceAPI.Entities
         public int Id { get; set; }
 
         [Required]
-        public int agentId { get; set; }
+        public int AgentId { get; set; }
 
         [Required]
-        public int clientId { get; set; }
+        public int ClientId { get; set; }
 
         [Required]
-        public string content { get; set; }
+        public string Content { get; set; }
 
         [Required]
-        public string dateCreated { get; set; }
+        public string DateCreated { get; set; }
 
     }
 }

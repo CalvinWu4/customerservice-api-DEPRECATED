@@ -3,6 +3,7 @@ namespace CustomerServiceAPI.Models
 {
     public class ReviewDtoForUpdate
     {
-        public string content { get; set; }
+        public string Content { get; set; }
+        public string DateCreated { get; set; }
     }
 }
