@@ -30,8 +30,6 @@ namespace CustomerServiceAPI
             string DB_URI = Configuration["DB"];
 
             services.AddMvc();
-            services.AddDbContext<TicketContext>(o => o.UseMySql(DB_URI));
-            services.AddScoped<ITicketRepository, TicketRepository>();
             services.AddDbContext<ReviewContext>(o => o.UseMySql(DB_URI));
             services.AddScoped<IReviewRepository, ReviewRepository>();
         }
@@ -46,9 +44,7 @@ namespace CustomerServiceAPI
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Entities.Ticket, Models.TicketDto>();
                 cfg.CreateMap<Entities.Review, Models.ReviewDto>();
-                cfg.CreateMap<Models.TicketDtoForCreation, Entities.Ticket>();
                 cfg.CreateMap<Models.ReviewDtoForCreation, Entities.Review> ();
             });
 

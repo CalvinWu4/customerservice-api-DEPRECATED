@@ -10,6 +10,5 @@ namespace CustomerServiceAPI.Models
 
         [Required(ErrorMessage = "Date created is required")]
         public string DateCreated { get; set; }
-
     }
 }

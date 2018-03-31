@@ -19,17 +19,17 @@ namespace CustomerServiceAPI.Controllers
             _reviewRepository = reviewRepository;
         }
 
-        // GET: api/agents/:agentId/reviews
-        [HttpGet("api/agents/{AgentID}")]
+        // GET: api/reviews
+        [HttpGet]
         public IActionResult Get()
         {
             var review = _reviewRepository.GetReviews();
             var results = Mapper.Map<IEnumerable<ReviewDto>>(review);
 
-            return Ok(results);
+            return Ok(_reviewRepository.GetReviews());
         }
 
-        // GET: api/agents/:agentId/reviews/:reivew
+        // GET: api/agents/:agentId/reviews/:review
         [HttpGet("{id}", Name = "GetReview")]
         public IActionResult Get(int id)
         {
@@ -59,7 +59,6 @@ namespace CustomerServiceAPI.Controllers
             var finalReview = Mapper.Map<Entities.Review>(review);
 
             // Default values until Clients & Agent API is mocked
-            finalReview.ClientId = 0;
             finalReview.AgentId = 0;
 
             _reviewRepository.AddReview(finalReview);

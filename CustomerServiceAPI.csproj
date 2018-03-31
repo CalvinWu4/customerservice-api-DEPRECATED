@@ -29,4 +29,14 @@
   <ItemGroup>
     <None Remove="wwwroot\appsetttings.Development.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\TicketsController.cs" />
+    <Compile Remove="Entities\Ticket.cs" />
+    <Compile Remove="Entities\TicketContext.cs" />
+    <Compile Remove="Models\TicketDto.cs" />
+    <Compile Remove="Models\TicketDtoForCreation.cs" />
+    <Compile Remove="Models\TicketDtoForUpdate.cs" />
+    <Compile Remove="Services\ITicketRepository.cs" />
+    <Compile Remove="Services\TicketRepository.cs" />
+  </ItemGroup>
 </Project>
