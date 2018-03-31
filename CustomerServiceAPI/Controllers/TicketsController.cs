@@ -12,7 +12,7 @@ namespace CustomerServiceAPI.Controllers
     [Route("api/[controller]")]
     public class TicketsController : Controller
     {
-        private ITicketRepository _ticketRepository;
+        private readonly ITicketRepository _ticketRepository;
 
         public TicketsController(ITicketRepository ticketRepository)
         {
