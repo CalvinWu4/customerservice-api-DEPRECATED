@@ -18,7 +18,6 @@
     <Compile Remove="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Stubs\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>

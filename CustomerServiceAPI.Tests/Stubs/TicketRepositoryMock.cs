@@ -3,13 +3,13 @@ using CustomerServiceAPI.Entities;
 using CustomerServiceAPI.Services;
 using System.Linq;
 
-namespace CustomerServiceAPI.Tests.Stubs
+namespace CustomerServiceAPI.Tests.Mocks
 {
-    public class TicketRepositoryStub : ITicketRepository
+    public class TicketRepositoryMock : ITicketRepository
     {
         List<Ticket> _tickets;
 
-        public TicketRepositoryStub()
+        public TicketRepositoryMock()
         {
             _tickets = new List<Ticket>();
         }
