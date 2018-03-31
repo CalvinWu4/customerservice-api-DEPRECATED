@@ -70,6 +70,7 @@ namespace CustomerServiceAPI.Controllers
 
             client.FirstName = clientData.FirstName == null ? client.FirstName : clientData.FirstName;
             client.LastName = clientData.LastName == null ? client.LastName : clientData.LastName;
+            client.Email = clientData.Email == null ? client.Email : clientData.Email;
 
             _clientRepository.UpdateClient(client);
             if (!_clientRepository.Save()) return BadRequest();
