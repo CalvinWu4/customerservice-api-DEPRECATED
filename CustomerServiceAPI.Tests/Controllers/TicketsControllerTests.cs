@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using CustomerServiceAPI.Tests.Mocks;
 using Microsoft.AspNetCore.Mvc;
 using FluentAssertions;
@@ -10,21 +9,31 @@ using System.Linq;
 
 namespace CustomerServiceAPI.Tests.Controllers
 {
-    public class Startup
+    public class StartupFixture
     {
-        public Startup()
+        public StartupFixture()
         {
             AutoMapperConfig.Setup();
         }
     }
-    public class EmptyRepoTests : IClassFixture<Startup>
+
+    [CollectionDefinition("StartupFixture collection")]
+    public class StartupCollection : ICollectionFixture<StartupFixture>
+    {
+        // This class has no code, and is never created. Its purpose is simply
+        // to be the place to apply [CollectionDefinition] and all the
+        // ICollectionFixture<> interfaces.
+    }
+
+    [Collection("StartupFixture collection")]
+    public class EmptyRepoTests
     {
         private readonly TicketsController _emptyRepoController;
-        private Startup _startup;
+        private StartupFixture _startupFixture;
 
-        public EmptyRepoTests(Startup startup)
+        public EmptyRepoTests(StartupFixture startupFixture)
         {
-            _startup = startup;
+            _startupFixture = startupFixture;
             _emptyRepoController = new TicketsController(new TicketRepositoryMock());
         }
 
@@ -129,14 +138,15 @@ namespace CustomerServiceAPI.Tests.Controllers
 
     }
 
-    public class SingleTicketRepoTests : IClassFixture<Startup>
+    [Collection("StartupFixture collection")]
+    public class SingleTicketRepoTests
     {
         private readonly TicketsController _singleTicketRepoController;
-        private Startup _startup;
+        private StartupFixture _startupFixture;
 
-        public SingleTicketRepoTests(Startup startup)
+        public SingleTicketRepoTests(StartupFixture startupFixture)
         {
-            _startup = startup;
+            _startupFixture = startupFixture;
             _singleTicketRepoController = new TicketsController(new TicketRepositoryMock());
             _singleTicketRepoController.Post(new TicketForCreationDto());
         }
@@ -203,7 +213,7 @@ namespace CustomerServiceAPI.Tests.Controllers
         }
 
         [Fact]
-        public void DeleteValidTicket_getTicketShouldReturnNotFound()
+        public void DeleteValidTicket_GetTicketShouldReturnNotFound()
         {
             _singleTicketRepoController.Delete(0);
             var result = _singleTicketRepoController.Get(0);
