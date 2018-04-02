@@ -60,18 +60,17 @@ namespace CustomerServiceAPI.Tests.Controllers
             tickets.Count().Should().Be(0); // Checking if it is empty
         }
 
-        // Needs Clients and Agents API implemented
-        // Pre: There needs to be at least one client in the system
-        [Fact]
-        public void GetValidClientId_ShouldReturnNonEmptyTicketList() 
-        {
-            var result = _emptyRepoController.GetAll(0);
-
-            var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
-            var tickets = okResult.Value.Should().BeAssignableTo<IEnumerable<TicketDto>>().Subject;
-
-            tickets.Count().Should().BeGreaterThan(0); // Checking if it is non-empty
-        }
+        // Move to client controllers tests
+//        [Fact]
+//        public void GetValidClientId_ShouldReturnNonEmptyTicketList() 
+//        {
+//            var result = _emptyRepoController.GetAll(0);
+//
+//            var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
+//            var tickets = okResult.Value.Should().BeAssignableTo<IEnumerable<TicketDto>>().Subject;
+//
+//            tickets.Count().Should().BeGreaterThan(0); // Checking if it is non-empty
+//        }
 
 
         #endregion
@@ -164,19 +163,8 @@ namespace CustomerServiceAPI.Tests.Controllers
         }
         #endregion
 
-        #region Post Tests
-        // Needs Clients and Agents API implemented
-        [Fact]
-        public void AfterValidPost_TicketReturnedIdShouldBeIncremented() 
-        {
-            var result = _singleTicketRepoController.Post(new TicketForCreationDto());
-
-            var createdAtRouteResult = result.Should().BeOfType<CreatedAtRouteResult>().Subject;
-            var ticket = createdAtRouteResult.Value.Should().BeAssignableTo<TicketDto>().Subject;
-
-           ticket.Id.Should().Be("1");   // SingleTicketRepo has a single ticket with an id of 0
-        }
-        #endregion
+        // Insert Post Test here to see if the ticket id increments for next release when use a mock 
+        // in-memory database rather than mocking it with an array
 
         #region Update Tests
         [Fact]
