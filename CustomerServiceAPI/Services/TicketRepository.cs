@@ -8,9 +8,9 @@ namespace CustomerServiceAPI.Services
 {
     public class TicketRepository : ITicketRepository
     {
-        private TicketContext _context;
+        private Context _context;
 
-        public TicketRepository(TicketContext context)
+        public TicketRepository(Context context)
         {
             _context = context;
         }

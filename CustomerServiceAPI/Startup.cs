@@ -30,8 +30,9 @@ namespace CustomerServiceAPI
             string DB_URI = Configuration["DB"];
 
             services.AddMvc();
-            services.AddDbContext<TicketContext>(o => o.UseMySql(DB_URI));
+            services.AddDbContext<Context>(o => o.UseMySql(DB_URI));
             services.AddScoped<ITicketRepository, TicketRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,9 +42,9 @@ namespace CustomerServiceAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
+          
             AutoMapperConfig.Setup();
-
+          
             app.UseMvc();
         }
     }
