@@ -12,14 +12,14 @@ namespace CustomerServiceAPI.Controllers
     [Route("api/[controller]")]
     public class TicketsController : Controller
     {
-        private ITicketRepository _ticketRepository;
+        private readonly ITicketRepository _ticketRepository;
 
         public TicketsController(ITicketRepository ticketRepository)
         {
             _ticketRepository = ticketRepository;
         }
 
-        // GET: api/tickets
+        #region GET: api/tickets
         [HttpGet]
         public IActionResult GetAll([FromQuery(Name = "ClientId")] int clientId = -1)
         {
@@ -34,8 +34,9 @@ namespace CustomerServiceAPI.Controllers
 
             return Ok(results);
         }
+#endregion
 
-        // GET api/tickets/5
+        #region GET api/tickets/{{id}}
         [HttpGet("{id}", Name = "GetTicket")]
         public IActionResult Get(int id)
         {
@@ -49,8 +50,9 @@ namespace CustomerServiceAPI.Controllers
 
             return Ok(result);
         }
+#endregion
 
-        // POST api/tickets
+        #region POST api/tickets
         [HttpPost]
         public IActionResult Post([FromBody]TicketForCreationDto ticket)
         {
@@ -80,8 +82,9 @@ namespace CustomerServiceAPI.Controllers
 
             return CreatedAtRoute("GetTicket", new { id = createdTicket.Id }, createdTicket);
         }
+        #endregion
 
-        // PUT api/tickets/5
+        #region PUT api/tickets/{{id}}
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] TicketDtoForUpdate ticketData)
         {
@@ -109,8 +112,9 @@ namespace CustomerServiceAPI.Controllers
 
             return new NoContentResult();
         }
+        #endregion
 
-        // DELETE api/tickets/5
+        #region DELETE api/tickets/{{id}}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -128,5 +132,7 @@ namespace CustomerServiceAPI.Controllers
 
             return new NoContentResult();
         }
+#endregion
+   
     }
 }

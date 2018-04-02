@@ -42,16 +42,9 @@ namespace CustomerServiceAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Entities.Ticket, Models.TicketDto>();
-                cfg.CreateMap<Models.TicketForCreationDto, Entities.Ticket>();
-
-                cfg.CreateMap<Entities.Client, Models.ClientDto>();
-                cfg.CreateMap<Models.ClientDtoForCreation, Entities.Client>();
-            });
-
+          
+            AutoMapperConfig.Setup();
+          
             app.UseMvc();
         }
     }
