@@ -38,5 +38,6 @@
     <Compile Remove="Models\TicketDtoForUpdate.cs" />
     <Compile Remove="Services\ITicketRepository.cs" />
     <Compile Remove="Services\TicketRepository.cs" />
+    <Compile Remove="Controllers\ReviewController.cs" />
   </ItemGroup>
 </Project>

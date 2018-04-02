@@ -20,14 +20,9 @@ namespace CustomerServiceAPI.Services
             _context.Add(review);
         }
 
-        public void UpdateReivew(Review review)
+        public Review GetReview(int reviewId)
         {
-            _context.Update(review);
-        }
-
-        public Review GetReview(int Id)
-        {
-            return _context.Reviews.FirstOrDefault(t => t.AgentId == Id);
+            return _context.Reviews.FirstOrDefault(t => t.Id == reviewId);
         }
 
         public IEnumerable<Review> GetReviews()
@@ -35,29 +30,19 @@ namespace CustomerServiceAPI.Services
             return _context.Reviews.OrderBy(t => t.DateCreated).ToList();
         }
 
-        public void DeleteTicket(Review review)
-        {
-            _context.Remove(review);
-        }
-
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);
         }
 
-        IEnumerable<Review> IReviewRepository.GetReviews()
+        public void DeleteReview(Review review)
         {
-            throw new NotImplementedException();
+            _context.Remove(review);
         }
 
         public void UpdateReview(Review review)
         {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteReview(Review review)
-        {
-            throw new NotImplementedException();
+            _context.Update(review);
         }
     }
 }
