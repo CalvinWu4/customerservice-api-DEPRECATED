@@ -25,9 +25,17 @@
 
   <ItemGroup>
     <Content Remove="appsettings.Development.json" />
+    <Content Remove="CustomerServiceAPI\obj\project.assets.json" />
+    <Content Remove="CustomerServiceAPI.Tests\obj\project.assets.json" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="wwwroot\appsetttings.Development.json" />
+    <None Remove="CustomerServiceAPI\obj\CustomerServiceAPI.csproj.nuget.cache" />
+    <None Remove="CustomerServiceAPI\obj\CustomerServiceAPI.csproj.nuget.g.props" />
+    <None Remove="CustomerServiceAPI\obj\CustomerServiceAPI.csproj.nuget.g.targets" />
+    <None Remove="CustomerServiceAPI.Tests\obj\CustomerServiceAPI.Tests.csproj.nuget.cache" />
+    <None Remove="CustomerServiceAPI.Tests\obj\CustomerServiceAPI.Tests.csproj.nuget.g.props" />
+    <None Remove="CustomerServiceAPI.Tests\obj\CustomerServiceAPI.Tests.csproj.nuget.g.targets" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\TicketsController.cs" />
