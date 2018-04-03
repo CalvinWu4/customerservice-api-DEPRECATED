@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using CustomerServiceAPI.Entities;
 using CustomerServiceAPI.Models;
 using CustomerServiceAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +12,9 @@ namespace CustomerServiceAPI.Controllers
     [Route("api/[controller]")]
     public class TicketsController : Controller
     {
-        private readonly TicketRepository _ticketRepository;
+        private readonly ITicketRepository _ticketRepository;
 
-        public TicketsController(TicketRepository ticketRepository)
+        public TicketsController(ITicketRepository ticketRepository)
         {
             _ticketRepository = ticketRepository;
         }
@@ -24,7 +23,7 @@ namespace CustomerServiceAPI.Controllers
         [HttpGet]
         public IActionResult GetAll([FromQuery(Name = "ClientId")] int clientId = -1)
         {
-            var tickets = _ticketRepository.FetchAll();
+            var tickets = _ticketRepository.GetTickets();
 
             if (clientId != -1)
             {
@@ -41,7 +40,7 @@ namespace CustomerServiceAPI.Controllers
         [HttpGet("{id}", Name = "GetTicket")]
         public IActionResult Get(int id)
         {
-            var ticket = _ticketRepository.Query(id);
+            var ticket = _ticketRepository.GetTicket(id);
             if (ticket == null)
             {
                 return NotFound();
@@ -55,7 +54,7 @@ namespace CustomerServiceAPI.Controllers
 
         #region POST api/tickets
         [HttpPost]
-        public IActionResult Post([FromBody]TicketDtoForCreation ticket)
+        public IActionResult Post([FromBody]TicketForCreationDto ticket)
         {
             if (ticket == null)
             {
@@ -72,7 +71,7 @@ namespace CustomerServiceAPI.Controllers
             finalTicket.AgentId = 0;
             finalTicket.Opened = DateTime.Now;
 
-            _ticketRepository.Add(finalTicket);
+            _ticketRepository.AddTicket(finalTicket);
 
             if(!_ticketRepository.Save())
             {
@@ -94,7 +93,7 @@ namespace CustomerServiceAPI.Controllers
                 return BadRequest();
             }
 
-            var ticket = _ticketRepository.Query(id);
+            var ticket = _ticketRepository.GetTicket(id);
             if (ticket == null)
             {
                 return NotFound();
@@ -104,7 +103,7 @@ namespace CustomerServiceAPI.Controllers
             ticket.Description = ticketData.Description == null ? ticket.Description : ticketData.Description;
             ticket.Status = ticketData.Status == null ? ticket.Status : ticketData.Status;
 
-            _ticketRepository.Update(ticket);
+            _ticketRepository.UpdateTicket(ticket);
 
             if(!_ticketRepository.Save())
             {
@@ -119,13 +118,13 @@ namespace CustomerServiceAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var ticket = _ticketRepository.Query(id);
+            var ticket = _ticketRepository.GetTicket(id);
             if (ticket == null)
             {
                 return NotFound();
             }
 
-            _ticketRepository.Delete(ticket);
+            _ticketRepository.DeleteTicket(ticket);
             if(!_ticketRepository.Save())
             {
                 return BadRequest();

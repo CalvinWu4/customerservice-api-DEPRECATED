@@ -2,15 +2,14 @@
 using System;
 namespace CustomerServiceAPI.Entities
 {
-    public class Context : DbContext
+    public class TicketContext : DbContext
     {
-        public Context(DbContextOptions<Context> options)
+        public TicketContext(DbContextOptions<TicketContext> options)
             :base(options)
         {
             Database.EnsureCreated();
         }
 
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<Client> Clients { get; set; }
     }
 }

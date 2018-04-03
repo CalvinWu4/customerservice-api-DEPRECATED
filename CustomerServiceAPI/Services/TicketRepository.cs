@@ -1,42 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using CustomerServiceAPI.Entities;
 using CustomerServiceAPI.Models;
 
 namespace CustomerServiceAPI.Services
 {
-    public class TicketRepository : IRepository<Ticket>
+    public class TicketRepository : ITicketRepository
     {
-        private readonly Context _context;
+        private TicketContext _context;
 
-        public TicketRepository(Context context)
+        public TicketRepository(TicketContext context)
         {
             _context = context;
         }
 
-        public void Add(Ticket ticket)
+        public void AddTicket(Ticket ticket)
         {
             _context.Add(ticket);
         }
 
-        public void Update(Ticket ticket)
+        public void UpdateTicket(Ticket ticket)
         {
             _context.Update(ticket);
         }
 
-        public Ticket Query(int id)
+        public Ticket GetTicket(int ticketId)
         {
-            return _context.Tickets.FirstOrDefault(t => t.Id == id);
+            return _context.Tickets.FirstOrDefault(t => t.Id == ticketId);
         }
 
-        public IEnumerable<Ticket> FetchAll()
+        public IEnumerable<Ticket> GetTickets()
         {
             return _context.Tickets.OrderBy(t => t.ClientId).ToList();
         }
 
-        public void Delete(Ticket ticket)
+        public void DeleteTicket(Ticket ticket)
         {
             _context.Remove(ticket);
         }
