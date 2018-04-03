@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CustomerServiceAPI.Entities;
 using CustomerServiceAPI.Models;
 using CustomerServiceAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,28 +13,35 @@ namespace CustomerServiceAPI.Controllers
     [Route("api/[controller]")]
     public class TicketsController : Controller
     {
-        private ITicketRepository _ticketRepository;
+        private readonly TicketRepository _ticketRepository;
 
-        public TicketsController(ITicketRepository ticketRepository)
+        public TicketsController(TicketRepository ticketRepository)
         {
             _ticketRepository = ticketRepository;
         }
 
-        // GET: api/tickets
+        #region GET: api/tickets
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll([FromQuery(Name = "ClientId")] int clientId = -1)
         {
-            var tickets = _ticketRepository.GetTickets();
+            var tickets = _ticketRepository.FetchAll();
+
+            if (clientId != -1)
+            {
+                tickets = tickets.Where<Entities.Ticket>(t => t.ClientId == clientId);
+            }
+
             var results = Mapper.Map<IEnumerable<TicketDto>>(tickets);
 
             return Ok(results);
         }
+#endregion
 
-        // GET api/tickets/5
+        #region GET api/tickets/{{id}}
         [HttpGet("{id}", Name = "GetTicket")]
         public IActionResult Get(int id)
         {
-            var ticket = _ticketRepository.GetTicket(id);
+            var ticket = _ticketRepository.Query(id);
             if (ticket == null)
             {
                 return NotFound();
@@ -43,8 +51,9 @@ namespace CustomerServiceAPI.Controllers
 
             return Ok(result);
         }
+#endregion
 
-        // POST api/tickets
+        #region POST api/tickets
         [HttpPost]
         public IActionResult Post([FromBody]TicketDtoForCreation ticket)
         {
@@ -53,11 +62,17 @@ namespace CustomerServiceAPI.Controllers
                 return BadRequest();
             }
 
-            // set ticket as 'new' status
-            ticket.Status = "new";
-
             var finalTicket = Mapper.Map<Entities.Ticket>(ticket);
-            _ticketRepository.AddTicket(finalTicket);
+
+            // set ticket as 'new' status
+            finalTicket.Status = "new";
+
+            // Default values until Clients & Agent API is mocked
+            finalTicket.ClientId = 0;
+            finalTicket.AgentId = 0;
+            finalTicket.Opened = DateTime.Now;
+
+            _ticketRepository.Add(finalTicket);
 
             if(!_ticketRepository.Save())
             {
@@ -68,8 +83,9 @@ namespace CustomerServiceAPI.Controllers
 
             return CreatedAtRoute("GetTicket", new { id = createdTicket.Id }, createdTicket);
         }
+        #endregion
 
-        // PUT api/tickets/5
+        #region PUT api/tickets/{{id}}
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] TicketDtoForUpdate ticketData)
         {
@@ -78,27 +94,17 @@ namespace CustomerServiceAPI.Controllers
                 return BadRequest();
             }
 
-            var ticket = _ticketRepository.GetTicket(id);
+            var ticket = _ticketRepository.Query(id);
             if (ticket == null)
             {
                 return NotFound();
             }
 
-            ticket.FirstName = ticketData.FirstName == null ? ticket.FirstName : ticketData.FirstName;
-            ticket.LastName = ticketData.LastName == null ? ticket.LastName : ticketData.LastName;
+            ticket.Title = ticketData.Title == null ? ticket.Title : ticketData.Title;
             ticket.Description = ticketData.Description == null ? ticket.Description : ticketData.Description;
             ticket.Status = ticketData.Status == null ? ticket.Status : ticketData.Status;
 
-            if (ticketData.Address != null) {
-                ticket.AddressLine1 = ticketData.Address.Line1 == null ? ticket.AddressLine1 : ticketData.Address.Line1;
-                ticket.AddressLine2 = ticketData.Address.Line2 == null ? ticket.AddressLine2 : ticketData.Address.Line2;
-                ticket.AddressCity = ticketData.Address.City == null ? ticket.AddressCity : ticketData.Address.City;
-                ticket.AddressState = ticketData.Address.State == null ? ticket.AddressState : ticketData.Address.State;
-                ticket.AddressZipcode = ticketData.Address.Zipcode == null ? ticket.AddressZipcode : ticketData.Address.Zipcode;
-                ticket.AddressCountry = ticketData.Address.Country == null ? ticket.AddressCountry : ticketData.Address.Country;
-            }
-
-            _ticketRepository.UpdateTicket(ticket);
+            _ticketRepository.Update(ticket);
 
             if(!_ticketRepository.Save())
             {
@@ -107,18 +113,19 @@ namespace CustomerServiceAPI.Controllers
 
             return new NoContentResult();
         }
+        #endregion
 
-        // DELETE api/tickets/5
+        #region DELETE api/tickets/{{id}}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var ticket = _ticketRepository.GetTicket(id);
+            var ticket = _ticketRepository.Query(id);
             if (ticket == null)
             {
                 return NotFound();
             }
 
-            _ticketRepository.DeleteTicket(ticket);
+            _ticketRepository.Delete(ticket);
             if(!_ticketRepository.Save())
             {
                 return BadRequest();
@@ -126,5 +133,7 @@ namespace CustomerServiceAPI.Controllers
 
             return new NoContentResult();
         }
+#endregion
+   
     }
 }
