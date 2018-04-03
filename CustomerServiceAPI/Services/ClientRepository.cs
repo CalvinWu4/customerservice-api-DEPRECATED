@@ -5,36 +5,36 @@ using CustomerServiceAPI.Entities;
 
 namespace CustomerServiceAPI.Services
 {
-    public class ClientRepository : IClientRepository
+    public class ClientRepository : IRepository<Client>
     {
-        private Context _context;
+        private readonly Context _context;
 
         public ClientRepository(Context context)
         {
             _context = context;
         }
 
-        public void AddClient(Client client)
+        public void Add(Client client)
         {
             _context.Add(client);
         }
 
-        public void UpdateClient(Client client)
+        public void Update(Client client)
         {
             _context.Update(client);
         }
 
-        public Client GetClient(int clientId)
+        public Client Query(int clientId)
         {
             return _context.Clients.FirstOrDefault(c => c.Id == clientId);
         }
 
-        public IEnumerable<Client> GetClients()
+        public IEnumerable<Client> FetchAll()
         {
             return _context.Clients.OrderBy(c => c.Id).ToList();
         }
 
-        public void DeleteClient(Client client)
+        public void Delete(Client client)
         {
             _context.Remove(client);
         }

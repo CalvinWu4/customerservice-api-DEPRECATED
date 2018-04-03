@@ -7,7 +7,7 @@ using CustomerServiceAPI.Models;
 
 namespace CustomerServiceAPI.Services
 {
-    public class TicketRepository<T> : IRepository<Ticket>
+    public class TicketRepository : IRepository<Ticket>
     {
         private readonly Context _context;
 

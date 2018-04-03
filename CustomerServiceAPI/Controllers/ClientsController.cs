@@ -15,9 +15,9 @@ namespace CustomerServiceAPI.Controllers
     [Route("api/[controller]")]
     public class ClientsController : Controller
     {
-        IClientRepository _clientRepository;
+        ClientRepository _clientRepository;
 
-        public ClientsController(IClientRepository clientRepository)
+        public ClientsController(ClientRepository clientRepository)
         {
             _clientRepository = clientRepository;
         }
@@ -26,14 +26,14 @@ namespace CustomerServiceAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_clientRepository.GetClients());
+            return Ok(_clientRepository.FetchAll());
         }
 
         // GET api/values/5
         [HttpGet("{id}", Name ="GetClient")]
         public IActionResult Get(int id)
         {
-            var client = _clientRepository.GetClient(id);
+            var client = _clientRepository.Query(id);
             if (client == null) return NotFound();
 
             return Ok(client);
@@ -46,7 +46,7 @@ namespace CustomerServiceAPI.Controllers
             if (client == null) return BadRequest();
 
             var finalClient = Mapper.Map<Client>(client);
-            _clientRepository.AddClient(finalClient);
+            _clientRepository.Add(finalClient);
 
             if(!_clientRepository.Save())
             {
@@ -62,14 +62,14 @@ namespace CustomerServiceAPI.Controllers
         {
             if (clientData == null) return BadRequest();
 
-            var client = _clientRepository.GetClient(id);
+            var client = _clientRepository.Query(id);
             if (client == null) return NotFound();
 
             client.FirstName = clientData.FirstName == null ? client.FirstName : clientData.FirstName;
             client.LastName = clientData.LastName == null ? client.LastName : clientData.LastName;
             client.Email = clientData.Email == null ? client.Email : clientData.Email;
 
-            _clientRepository.UpdateClient(client);
+            _clientRepository.Update(client);
             if (!_clientRepository.Save()) return BadRequest();
 
             return NoContent();
@@ -79,10 +79,10 @@ namespace CustomerServiceAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var client = _clientRepository.GetClient(id);
+            var client = _clientRepository.Query(id);
             if (client == null) return NotFound();
 
-            _clientRepository.DeleteClient(client);
+            _clientRepository.Delete(client);
             if (!_clientRepository.Save())
             {
                 return BadRequest();

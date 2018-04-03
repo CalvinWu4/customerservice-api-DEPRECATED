@@ -13,9 +13,9 @@ namespace CustomerServiceAPI.Controllers
     [Route("api/[controller]")]
     public class TicketsController : Controller
     {
-        private readonly TicketRepository<Ticket> _ticketRepository;
+        private readonly TicketRepository _ticketRepository;
 
-        public TicketsController(TicketRepository<Ticket> ticketRepository)
+        public TicketsController(TicketRepository ticketRepository)
         {
             _ticketRepository = ticketRepository;
         }

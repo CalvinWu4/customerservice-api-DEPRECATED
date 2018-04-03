@@ -31,8 +31,8 @@ namespace CustomerServiceAPI
 
             services.AddMvc();
             services.AddDbContext<Context>(o => o.UseMySql(DB_URI));
-            services.AddScoped< TicketRepository<Ticket> >();
-            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<TicketRepository>();
+            services.AddScoped<ClientRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
