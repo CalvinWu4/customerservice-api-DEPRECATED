@@ -80,7 +80,7 @@ namespace CustomerServiceAPI.Controllers
         public IActionResult Delete(int id)
         {
             var client = _clientRepository.GetClient(id);
-            if (client == null) NotFound();
+            if (client == null) return NotFound();
 
             _clientRepository.DeleteClient(client);
             if (!_clientRepository.Save())
