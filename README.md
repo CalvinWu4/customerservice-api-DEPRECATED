@@ -35,3 +35,7 @@ Any changes to master will be automatically reflected in the production environm
 
 For accessing the web application, please visit:
 `https://web-customersupport.azurewebsites.net/`
+
+## More info
+
+Living API DOC `https://documenter.getpostman.com/view/647444/ptapi/RVu1KBsi`
