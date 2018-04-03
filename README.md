@@ -25,6 +25,7 @@ Getting this project is very easy.
 
 
 ## Running the tests
+Press CTRL+R ,A to run the tests.
 
 
 ## Deployment
