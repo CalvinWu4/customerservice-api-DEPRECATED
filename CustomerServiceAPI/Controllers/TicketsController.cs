@@ -32,36 +32,27 @@ namespace CustomerServiceAPI.Controllers
             }
 
             var results = Mapper.Map<IEnumerable<TicketDto>>(tickets);
-
             return Ok(results);
         }
-#endregion
+        #endregion
 
         #region GET api/tickets/{{id}}
         [HttpGet("{id}", Name = "GetTicket")]
         public IActionResult Get(int id)
         {
             var ticket = _ticketRepository.Query(id);
-            if (ticket == null)
-            {
-                return NotFound();
-            }
+            if (ticket == null) return NotFound();
 
             var result = Mapper.Map<TicketDto>(ticket);
-
             return Ok(result);
         }
-#endregion
+        #endregion
 
         #region POST api/tickets
         [HttpPost]
         public IActionResult Post([FromBody]TicketForCreationDto ticket)
         {
-            if (ticket == null)
-            {
-                return BadRequest();
-            }
-
+            if (ticket == null) return BadRequest();
             var finalTicket = Mapper.Map<Entities.Ticket>(ticket);
 
             // set ticket as 'new' status
@@ -73,12 +64,7 @@ namespace CustomerServiceAPI.Controllers
             finalTicket.Opened = DateTime.Now;
 
             _ticketRepository.Add(finalTicket);
-
-            if(!_ticketRepository.Save())
-            {
-                return StatusCode(500, "An error happened while creating ticket");
-            }
-
+            if (!_ticketRepository.Save()) return BadRequest();
             var createdTicket = Mapper.Map<Models.TicketDto>(finalTicket);
 
             return CreatedAtRoute("GetTicket", new { id = createdTicket.Id }, createdTicket);
@@ -89,16 +75,10 @@ namespace CustomerServiceAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] TicketDtoForUpdate ticketData)
         {
-            if (ticketData == null)
-            {
-                return BadRequest();
-            }
+            if (ticketData == null) return BadRequest();
 
             var ticket = _ticketRepository.Query(id);
-            if (ticket == null)
-            {
-                return NotFound();
-            }
+            if (ticket == null) return NotFound();
 
             ticket.Title = ticketData.Title == null ? ticket.Title : ticketData.Title;
             ticket.Description = ticketData.Description == null ? ticket.Description : ticketData.Description;
@@ -106,10 +86,7 @@ namespace CustomerServiceAPI.Controllers
 
             _ticketRepository.Update(ticket);
 
-            if(!_ticketRepository.Save())
-            {
-                return BadRequest();
-            }
+            if (!_ticketRepository.Save()) return BadRequest();
 
             return new NoContentResult();
         }
@@ -120,20 +97,14 @@ namespace CustomerServiceAPI.Controllers
         public IActionResult Delete(int id)
         {
             var ticket = _ticketRepository.Query(id);
-            if (ticket == null)
-            {
-                return NotFound();
-            }
+            if (ticket == null) return NotFound();
 
             _ticketRepository.Delete(ticket);
-            if(!_ticketRepository.Save())
-            {
-                return BadRequest();
-            }
+            if (!_ticketRepository.Save()) return BadRequest();
 
             return new NoContentResult();
         }
-#endregion
+        #endregion
    
     }
 }

@@ -29,7 +29,7 @@ namespace CustomerServiceAPI.Controllers
             return Ok(_clientRepository.FetchAll());
         }
 
-        // GET api/values/5
+        // GET api/clients/5
         [HttpGet("{id}", Name ="GetClient")]
         public IActionResult Get(int id)
         {
@@ -48,11 +48,7 @@ namespace CustomerServiceAPI.Controllers
             var finalClient = Mapper.Map<Client>(client);
             _clientRepository.Add(finalClient);
 
-            if(!_clientRepository.Save())
-            {
-                return BadRequest();
-            }
-
+            if (!_clientRepository.Save()) return BadRequest();
             return CreatedAtRoute("GetClient", new { id = finalClient.Id }, finalClient);
         }
 
@@ -83,10 +79,7 @@ namespace CustomerServiceAPI.Controllers
             if (client == null) return NotFound();
 
             _clientRepository.Delete(client);
-            if (!_clientRepository.Save())
-            {
-                return BadRequest();
-            }
+            if (!_clientRepository.Save()) return BadRequest();
 
             return NoContent();
         }
