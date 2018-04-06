@@ -73,7 +73,7 @@ namespace CustomerServiceAPI.Controllers
 
         #region PUT api/tickets/{{id}}
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] TicketDtoForUpdate ticketData)
+        public IActionResult Update(int id, [FromBody] TicketForUpdateDto ticketData)
         {
             if (ticketData == null) return BadRequest();
 
