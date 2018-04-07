@@ -23,6 +23,11 @@ Getting this project is very easy.
 4. Place your MySQL connection string in the `appsettings.Development.json` as shown in the file
 5. Hit the `run + build` button in Visual Studio & Profit 🎁
 
+### Note
+
+When accessing the react portal, feel free to use any email and password as long as:
+  - Email is a real email 
+  - Password is at least 6 characters
 
 ## Running the tests
 Press CTRL+R, A to run the tests.
